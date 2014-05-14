@@ -22,6 +22,8 @@
 		12D7AD4B1923B6AB00533F10 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D7AD2F1923B6AB00533F10 /* CoreData.framework */; };
 		12D7AD531923B6AB00533F10 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 12D7AD511923B6AB00533F10 /* InfoPlist.strings */; };
 		12D7AD551923B6AB00533F10 /* _DoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D7AD541923B6AB00533F10 /* _DoTests.m */; };
+		12D7AD5F1923D99F00533F10 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12D7AD5E1923D99F00533F10 /* Storyboard.storyboard */; };
+		12D7AD611923DA1800533F10 /* Storyboard-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12D7AD601923DA1800533F10 /* Storyboard-iPad.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		12D7AD501923B6AB00533F10 /* 2DoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "2DoTests-Info.plist"; sourceTree = "<group>"; };
 		12D7AD521923B6AB00533F10 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		12D7AD541923B6AB00533F10 /* _DoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _DoTests.m; sourceTree = "<group>"; };
+		12D7AD5E1923D99F00533F10 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		12D7AD601923DA1800533F10 /* Storyboard-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Storyboard-iPad.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,8 @@
 		12D7AD311923B6AB00533F10 /* 2Do */ = {
 			isa = PBXGroup;
 			children = (
+				12D7AD5E1923D99F00533F10 /* Storyboard.storyboard */,
+				12D7AD601923DA1800533F10 /* Storyboard-iPad.storyboard */,
 				12D7AD3A1923B6AB00533F10 /* AppDelegate.h */,
 				12D7AD3B1923B6AB00533F10 /* AppDelegate.m */,
 				12D7AD401923B6AB00533F10 /* Images.xcassets */,
@@ -200,6 +206,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Robin Crorie";
 				TargetAttributes = {
+					12D7AD251923B6AB00533F10 = {
+						DevelopmentTeam = AD6FJVUSPX;
+					};
 					12D7AD451923B6AB00533F10 = {
 						TestTargetID = 12D7AD251923B6AB00533F10;
 					};
@@ -229,7 +238,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				12D7AD361923B6AB00533F10 /* InfoPlist.strings in Resources */,
+				12D7AD611923DA1800533F10 /* Storyboard-iPad.storyboard in Resources */,
 				12D7AD411923B6AB00533F10 /* Images.xcassets in Resources */,
+				12D7AD5F1923D99F00533F10 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +380,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "2Do/2Do-Prefix.pch";
 				INFOPLIST_FILE = "2Do/2Do-Info.plist";
@@ -382,6 +394,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "2Do/2Do-Prefix.pch";
 				INFOPLIST_FILE = "2Do/2Do-Info.plist";
