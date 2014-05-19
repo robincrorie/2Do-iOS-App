@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		127B54CF1926886F0094463E /* Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 127B54CE1926886F0094463E /* Loading.m */; };
+		127B54D61928CA6D0094463E /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 127B54D21928CA6D0094463E /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		127B54D71928CA6D0094463E /* SoapTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 127B54D51928CA6D0094463E /* SoapTool.m */; };
+		127B54DE1928CE5D0094463E /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 127B54DD1928CE5D0094463E /* Task.m */; };
+		127B54E1192918180094463E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 127B54E0192918180094463E /* User.m */; };
+		127B54E6192930EB0094463E /* Synchroniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 127B54E5192930EB0094463E /* Synchroniser.m */; };
+		127B54EA1929E51B0094463E /* TaskObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 127B54E91929E51B0094463E /* TaskObject.m */; };
 		12D7AD2A1923B6AB00533F10 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D7AD291923B6AB00533F10 /* Foundation.framework */; };
 		12D7AD2C1923B6AB00533F10 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D7AD2B1923B6AB00533F10 /* CoreGraphics.framework */; };
 		12D7AD2E1923B6AB00533F10 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D7AD2D1923B6AB00533F10 /* UIKit.framework */; };
@@ -24,6 +31,12 @@
 		12D7AD551923B6AB00533F10 /* _DoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D7AD541923B6AB00533F10 /* _DoTests.m */; };
 		12D7AD5F1923D99F00533F10 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12D7AD5E1923D99F00533F10 /* Storyboard.storyboard */; };
 		12D7AD611923DA1800533F10 /* Storyboard-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12D7AD601923DA1800533F10 /* Storyboard-iPad.storyboard */; };
+		12D7AD641923E12800533F10 /* ToDo.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D7AD631923E12800533F10 /* ToDo.m */; };
+		12D7AD671923E13B00533F10 /* Completed.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D7AD661923E13B00533F10 /* Completed.m */; };
+		12D7AD6D1924AF1700533F10 /* NewTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D7AD6C1924AF1700533F10 /* NewTask.m */; };
+		12D7AD711924C45B00533F10 /* TaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D7AD701924C45B00533F10 /* TaskCell.m */; };
+		12D7B0A41926414800533F10 /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D7B0A31926414800533F10 /* Login.m */; };
+		12D7B0A71926418700533F10 /* Register.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D7B0A61926418700533F10 /* Register.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +50,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		127B54CD1926886F0094463E /* Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Loading.h; path = 2Do/LoadingScreen/Loading.h; sourceTree = "<group>"; };
+		127B54CE1926886F0094463E /* Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Loading.m; path = 2Do/LoadingScreen/Loading.m; sourceTree = "<group>"; };
+		127B54D11928CA6D0094463E /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		127B54D21928CA6D0094463E /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		127B54D41928CA6D0094463E /* SoapTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoapTool.h; sourceTree = "<group>"; };
+		127B54D51928CA6D0094463E /* SoapTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoapTool.m; sourceTree = "<group>"; };
+		127B54D81928CAB60094463E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		127B54DC1928CE5D0094463E /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Task.h; path = Objects/Task.h; sourceTree = "<group>"; };
+		127B54DD1928CE5D0094463E /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Task.m; path = Objects/Task.m; sourceTree = "<group>"; };
+		127B54DF192918180094463E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Objects/User.h; sourceTree = "<group>"; };
+		127B54E0192918180094463E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Objects/User.m; sourceTree = "<group>"; };
+		127B54E4192930EB0094463E /* Synchroniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Synchroniser.h; path = 2Do/Synchroniser/Synchroniser.h; sourceTree = "<group>"; };
+		127B54E5192930EB0094463E /* Synchroniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Synchroniser.m; path = 2Do/Synchroniser/Synchroniser.m; sourceTree = "<group>"; };
+		127B54E81929E51B0094463E /* TaskObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaskObject.h; path = 2Do/Objects/TaskObject.h; sourceTree = SOURCE_ROOT; };
+		127B54E91929E51B0094463E /* TaskObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaskObject.m; path = 2Do/Objects/TaskObject.m; sourceTree = SOURCE_ROOT; };
 		12D7AD261923B6AB00533F10 /* 2Do.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2Do.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12D7AD291923B6AB00533F10 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		12D7AD2B1923B6AB00533F10 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -57,6 +85,18 @@
 		12D7AD541923B6AB00533F10 /* _DoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _DoTests.m; sourceTree = "<group>"; };
 		12D7AD5E1923D99F00533F10 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		12D7AD601923DA1800533F10 /* Storyboard-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Storyboard-iPad.storyboard"; sourceTree = "<group>"; };
+		12D7AD621923E12800533F10 /* ToDo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDo.h; sourceTree = "<group>"; };
+		12D7AD631923E12800533F10 /* ToDo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDo.m; sourceTree = "<group>"; };
+		12D7AD651923E13B00533F10 /* Completed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Completed.h; sourceTree = "<group>"; };
+		12D7AD661923E13B00533F10 /* Completed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Completed.m; sourceTree = "<group>"; };
+		12D7AD6B1924AF1700533F10 /* NewTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTask.h; sourceTree = "<group>"; };
+		12D7AD6C1924AF1700533F10 /* NewTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTask.m; sourceTree = "<group>"; };
+		12D7AD6F1924C45B00533F10 /* TaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskCell.h; sourceTree = "<group>"; };
+		12D7AD701924C45B00533F10 /* TaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskCell.m; sourceTree = "<group>"; };
+		12D7B0A21926414800533F10 /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
+		12D7B0A31926414800533F10 /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
+		12D7B0A51926418700533F10 /* Register.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Register.h; sourceTree = "<group>"; };
+		12D7B0A61926418700533F10 /* Register.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Register.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,9 +125,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		127B54CC192688430094463E /* Loading Screen */ = {
+			isa = PBXGroup;
+			children = (
+				127B54CD1926886F0094463E /* Loading.h */,
+				127B54CE1926886F0094463E /* Loading.m */,
+			);
+			name = "Loading Screen";
+			sourceTree = "<group>";
+		};
+		127B54D01928CA6D0094463E /* GDataXML */ = {
+			isa = PBXGroup;
+			children = (
+				127B54D11928CA6D0094463E /* GDataXMLNode.h */,
+				127B54D21928CA6D0094463E /* GDataXMLNode.m */,
+			);
+			name = GDataXML;
+			path = 2Do/GDataXML;
+			sourceTree = "<group>";
+		};
+		127B54D31928CA6D0094463E /* SoapTool */ = {
+			isa = PBXGroup;
+			children = (
+				127B54E71929E5090094463E /* Objects */,
+				127B54D41928CA6D0094463E /* SoapTool.h */,
+				127B54D51928CA6D0094463E /* SoapTool.m */,
+			);
+			name = SoapTool;
+			path = 2Do/SoapTool;
+			sourceTree = "<group>";
+		};
+		127B54E3192930320094463E /* Synchroniser */ = {
+			isa = PBXGroup;
+			children = (
+				127B54E4192930EB0094463E /* Synchroniser.h */,
+				127B54E5192930EB0094463E /* Synchroniser.m */,
+			);
+			name = Synchroniser;
+			sourceTree = "<group>";
+		};
+		127B54E71929E5090094463E /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				127B54E81929E51B0094463E /* TaskObject.h */,
+				127B54E91929E51B0094463E /* TaskObject.m */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
 		12D7AD1D1923B6AB00533F10 = {
 			isa = PBXGroup;
 			children = (
+				127B54E3192930320094463E /* Synchroniser */,
+				127B54D31928CA6D0094463E /* SoapTool */,
+				127B54D01928CA6D0094463E /* GDataXML */,
+				127B54CC192688430094463E /* Loading Screen */,
 				12D7AD311923B6AB00533F10 /* 2Do */,
 				12D7AD4E1923B6AB00533F10 /* 2DoTests */,
 				12D7AD281923B6AB00533F10 /* Frameworks */,
@@ -119,10 +211,23 @@
 		12D7AD311923B6AB00533F10 /* 2Do */ = {
 			isa = PBXGroup;
 			children = (
+				127B54D81928CAB60094463E /* Constants.h */,
 				12D7AD5E1923D99F00533F10 /* Storyboard.storyboard */,
 				12D7AD601923DA1800533F10 /* Storyboard-iPad.storyboard */,
 				12D7AD3A1923B6AB00533F10 /* AppDelegate.h */,
 				12D7AD3B1923B6AB00533F10 /* AppDelegate.m */,
+				12D7B0A21926414800533F10 /* Login.h */,
+				12D7B0A31926414800533F10 /* Login.m */,
+				12D7B0A51926418700533F10 /* Register.h */,
+				12D7B0A61926418700533F10 /* Register.m */,
+				12D7AD621923E12800533F10 /* ToDo.h */,
+				12D7AD631923E12800533F10 /* ToDo.m */,
+				12D7AD651923E13B00533F10 /* Completed.h */,
+				12D7AD661923E13B00533F10 /* Completed.m */,
+				12D7AD6B1924AF1700533F10 /* NewTask.h */,
+				12D7AD6C1924AF1700533F10 /* NewTask.m */,
+				12D7AD6E1924C3E700533F10 /* Table Cells */,
+				12D7AD721924EA0000533F10 /* Objects */,
 				12D7AD401923B6AB00533F10 /* Images.xcassets */,
 				12D7AD3D1923B6AB00533F10 /* _Do.xcdatamodeld */,
 				12D7AD321923B6AB00533F10 /* Supporting Files */,
@@ -157,6 +262,26 @@
 				12D7AD511923B6AB00533F10 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		12D7AD6E1924C3E700533F10 /* Table Cells */ = {
+			isa = PBXGroup;
+			children = (
+				12D7AD6F1924C45B00533F10 /* TaskCell.h */,
+				12D7AD701924C45B00533F10 /* TaskCell.m */,
+			);
+			name = "Table Cells";
+			sourceTree = "<group>";
+		};
+		12D7AD721924EA0000533F10 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				127B54DC1928CE5D0094463E /* Task.h */,
+				127B54DD1928CE5D0094463E /* Task.m */,
+				127B54DF192918180094463E /* User.h */,
+				127B54E0192918180094463E /* User.m */,
+			);
+			name = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,9 +384,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				127B54DE1928CE5D0094463E /* Task.m in Sources */,
+				127B54EA1929E51B0094463E /* TaskObject.m in Sources */,
 				12D7AD3C1923B6AB00533F10 /* AppDelegate.m in Sources */,
+				12D7AD711924C45B00533F10 /* TaskCell.m in Sources */,
 				12D7AD3F1923B6AB00533F10 /* _Do.xcdatamodeld in Sources */,
+				12D7B0A41926414800533F10 /* Login.m in Sources */,
+				12D7AD671923E13B00533F10 /* Completed.m in Sources */,
+				127B54D61928CA6D0094463E /* GDataXMLNode.m in Sources */,
 				12D7AD381923B6AB00533F10 /* main.m in Sources */,
+				127B54E1192918180094463E /* User.m in Sources */,
+				12D7AD6D1924AF1700533F10 /* NewTask.m in Sources */,
+				12D7B0A71926418700533F10 /* Register.m in Sources */,
+				127B54CF1926886F0094463E /* Loading.m in Sources */,
+				127B54E6192930EB0094463E /* Synchroniser.m in Sources */,
+				12D7AD641923E12800533F10 /* ToDo.m in Sources */,
+				127B54D71928CA6D0094463E /* SoapTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,8 +521,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "2Do/2Do-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = "2Do/2Do-Info.plist";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -397,8 +542,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "2Do/2Do-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = "2Do/2Do-Info.plist";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -462,6 +614,7 @@
 				12D7AD5A1923B6AB00533F10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		12D7AD5B1923B6AB00533F10 /* Build configuration list for PBXNativeTarget "2DoTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +623,7 @@
 				12D7AD5D1923B6AB00533F10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
