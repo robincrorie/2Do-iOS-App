@@ -9,7 +9,7 @@
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "AppIcon40x40.png",
+      "filename" : "AppIcon40x40@2x copy.png",
       "scale" : "2x"
     },
     {
@@ -33,7 +33,7 @@
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "AppIcon40x40 copy.png",
+      "filename" : "AppIcon40x40.png",
       "scale" : "1x"
     },
     {
