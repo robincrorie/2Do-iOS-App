@@ -39,11 +39,6 @@
 	NSURLResponse * response;
 	NSData * xmlData = [NSURLConnection sendSynchronousRequest:theRequest returningResponse:&response error:&connectionError];
 	
-	NSString *theXML = [[NSString alloc] initWithBytes: [xmlData bytes] length:[xmlData length] encoding:NSUTF8StringEncoding];
-
-	NSLog(@"%@", soapMessage);
-	NSLog(@"%@", [theXML stringByReplacingOccurrencesOfString:@"><" withString:@">\n<"]);
-	
 	if (connectionError) {
 		*error = connectionError;
 		return nil;

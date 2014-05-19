@@ -9,6 +9,7 @@
 #import "Register.h"
 #import "LoadingScreen/Loading.h"
 #import "SoapTool.h"
+#import "User.h"
 
 @interface Register () <UIScrollViewDelegate, UITextFieldDelegate>
 {
@@ -80,6 +81,7 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+	textField.layer.borderColor=[[UIColor clearColor]CGColor];
 	activeField = textField;
 	return YES;
 }
@@ -122,28 +124,70 @@
 - (IBAction)registerUser:(id)sender
 {
 	[loading show];
-	if ([password.text isEqualToString:passwordConfirm.text]) {
-		dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-			NSError * error = nil;
-			int userId = [SoapTool createUserAccount:emailAddress.text password:password.text error:&error];
-			
-			dispatch_async( dispatch_get_main_queue(), ^{
-				if (!error && userId) {
-					NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-					[defaults setValue:[NSString stringWithFormat:@"%d", userId] forKey:@"UserId"];
-					[defaults synchronize];
-					[self performSegueWithIdentifier:@"MainView" sender:self];
-				} else {
-					UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops..." message:@"Email address or password is incorrect" delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
-					[alert show];
-				}
-				[loading hide];
-			});
-		});
+	
+	BOOL validationError = NO;
+	if (emailAddress.text.length == 0) {
+		validationError = YES;
+		emailAddress.layer.masksToBounds=YES;
+		emailAddress.layer.borderColor=[[UIColor redColor]CGColor];
+		emailAddress.layer.borderWidth= 1.0f;
+	}
+	if (password.text.length == 0) {
+		validationError = YES;
+		password.layer.masksToBounds=YES;
+		password.layer.borderColor=[[UIColor redColor]CGColor];
+		password.layer.borderWidth= 1.0f;
+	}
+	if (passwordConfirm.text.length == 0) {
+		validationError = YES;
+		passwordConfirm.layer.masksToBounds=YES;
+		passwordConfirm.layer.borderColor=[[UIColor redColor]CGColor];
+		passwordConfirm.layer.borderWidth= 1.0f;
+	}
+	
+	if (validationError) {
+		[loading hide];
+		UIAlertView * validationAlert = [[UIAlertView alloc] initWithTitle:@"Oops.." message:@"You must complete all the fields" delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
+		[validationAlert show];
 	}
 	else {
-		UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops..." message:@"Your passwords do not match!" delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
-		[alert show];
+		if ([password.text isEqualToString:passwordConfirm.text]) {
+			dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+				NSError * error = nil;
+				int userId = [SoapTool createUserAccount:emailAddress.text password:password.text error:&error];
+				
+				dispatch_async( dispatch_get_main_queue(), ^{
+					if (!error && userId) {
+						
+						AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+						NSManagedObjectContext *context = [appDelegate managedObjectContext];
+						
+						User * newUser = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
+						newUser.userId = [NSNumber numberWithInt:userId];
+						newUser.email = emailAddress.text;
+						newUser.password = password.text;
+						NSError * error = nil;
+						[context save:&error];
+						
+						NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+						[defaults setValue:[NSString stringWithFormat:@"%d", userId] forKey:@"UserId"];
+						[defaults setValue:emailAddress.text forKey:@"UserEmail"];
+						[defaults synchronize];
+						
+						[self performSegueWithIdentifier:@"MainView" sender:self];
+					} else {
+						UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops..." message:@"Email address or password is incorrect" delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
+						[alert show];
+					}
+					[loading hide];
+				});
+			});
+		}
+		else {
+			[loading hide];
+			UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops..." message:@"Your passwords do not match!" delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
+			[alert show];
+		}
 	}
 }
 	

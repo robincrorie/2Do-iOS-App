@@ -169,14 +169,12 @@
 				[defaults synchronize];
 				[self performSegueWithIdentifier:@"MainView" sender:self];
 				[loading hide];
-				NSLog(@"Found user locally and password matched");
 				return;
 			}
 			else {
 				UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops..." message:@"Email address or password is incorrect" delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
 				[alert show];
 				[loading hide];
-				NSLog(@"Found user locally and password did NOT match");
 				return;
 			}
 		}
@@ -201,10 +199,14 @@
 					
 					[self performSegueWithIdentifier:@"MainView" sender:self];
 				} else {
-					NSLog(@"%ld", (long)error.code);
-					NSLog(@"%@", error.localizedDescription);
-					UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops..." message:@"Email address or password is incorrect" delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
-					[alert show];
+					if (error.code == -1009) {
+						UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops..." message:error.localizedDescription delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
+						[alert show];
+					}
+					else {
+						UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops..." message:@"Email address or password is incorrect" delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
+						[alert show];
+					}
 				}
 				[loading hide];
 			});

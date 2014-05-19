@@ -172,7 +172,6 @@ typedef enum {
 {
     
     if (indexPath.section == 0 && indexPath.row == 1) {
-		NSLog(@"Description content size = %f", taskDescription.contentSize.height);
         if (taskDescription.contentSize.height > 50) {
             float height = [self heightForTextView:taskDescription containingString:descriptionText];
             return height;

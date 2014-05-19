@@ -12,9 +12,12 @@
 #import "Task.h"
 #import "NewTask.h"
 #import "Synchroniser/Synchroniser.h"
+#import "RefreshTableHeader.h"
 
-@interface ToDo () <TaskCellDelegate>
+@interface ToDo () <TaskCellDelegate, RefreshTableHeaderDelegate>
 {
+	RefreshTableHeader *_refreshHeader;
+	BOOL _reloading;
 	NSMutableArray * tasks;
 	NSDateFormatter * dateFormatter;
 	
@@ -44,7 +47,15 @@
     
 	self.navigationItem.leftBarButtonItem = self.editButtonItem;
 	
-	[self.refreshControl addTarget:self action:@selector(syncData) forControlEvents:UIControlEventValueChanged];
+	if (_refreshHeader == nil) {
+		RefreshTableHeader *view = [[RefreshTableHeader alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+		view.delegate = self;
+		[self.tableView addSubview:view];
+		_refreshHeader = view;
+	}
+	
+	//  update the last update date
+	[_refreshHeader refreshLastUpdatedDate];
 	
 	[self loadTasks];
 }
@@ -58,6 +69,8 @@
 - (void)loadTasks {
 	tasks = [[NSMutableArray alloc] init];
 	
+	NSString * userId = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserId"];
+	
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 	
     context = [appDelegate managedObjectContext];
@@ -67,7 +80,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDesc];
 	
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(isComplete = NO OR isComplete = nil) && (hasBeenDeleted = NO OR hasBeenDeleted = nil)"];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(isComplete = NO OR isComplete = nil) && (hasBeenDeleted = NO OR hasBeenDeleted = nil) && (userId = %@)", userId];
     [request setPredicate:pred];
 	
     NSError *error;
@@ -91,6 +104,7 @@
 	
 	Task * task = tasks[indexPathCell.row];
 	task.isComplete = [button isSelected];
+	task.updateDate = [[NSDate alloc] init];
 	
 	NSError * error = nil;
 	[context save:&error];
@@ -125,7 +139,7 @@
 				UIAlertView * syncAlert = [[UIAlertView alloc] initWithTitle:@"Sync Error" message:@"Unable to syncronise with the server. Please check your internet connection." delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
 				[syncAlert show];
 			}
-			[self.refreshControl endRefreshing];
+			[self endRefreshing];
 		});
 	});
 }
@@ -270,6 +284,45 @@
 	CGFloat height = rect.size.height;
     
 	return height;
+}
+
+#pragma mark -
+#pragma mark Data Source Loading / Reloading Methods
+
+- (void)reloadTableViewDataSource{
+	[self syncData];
+}
+
+- (void)endRefreshing{
+	[_refreshHeader refreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+}
+
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+	[_refreshHeader refreshScrollViewDidScroll:scrollView];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	[_refreshHeader refreshScrollViewDidEndDragging:scrollView];
+}
+
+
+#pragma mark -
+#pragma mark RefreshTableHeaderDelegate Methods
+
+- (void)refreshTableHeaderDidTriggerRefresh:(RefreshTableHeader*)view{
+	[self reloadTableViewDataSource];
+}
+
+- (BOOL)refreshTableHeaderDataSourceIsLoading:(RefreshTableHeader*)view{
+	return _reloading; // should return if data source model is reloading
+}
+
+- (NSDate*)refreshTableHeaderDataSourceLastUpdated:(RefreshTableHeader*)view{
+	return [[NSUserDefaults standardUserDefaults] objectForKey:@"LastSyncDate"]; // should return date data source was last changed
 }
 
 @end

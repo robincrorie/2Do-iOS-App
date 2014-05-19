@@ -25,8 +25,8 @@
     [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"BackButton"]];
 	[[UINavigationBar appearance] setShadowImage:[UIImage imageNamed:@"NavBarShadow"]];
 	
-	[[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
-	[[UITabBar appearance] setTintColor:[UIColor darkTextColor]];
+	[[UITabBar appearance] setBarTintColor:[UIColor darkGrayColor]];
+	[[UITabBar appearance] setTintColor:[UIColor whiteColor]];
 	
 	NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.4];

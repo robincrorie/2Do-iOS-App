@@ -11,9 +11,13 @@
 #import "AppDelegate.h"
 #import "Task.h"
 #import "NewTask.h"
+#import "Synchroniser/Synchroniser.h"
+#import "RefreshTableHeader/RefreshTableHeader.h"
 
-@interface Completed () <TaskCellDelegate>
+@interface Completed () <TaskCellDelegate, RefreshTableHeaderDelegate>
 {
+	RefreshTableHeader *_refreshHeader;
+	BOOL _reloading;
 	NSMutableArray * tasks;
 	NSDateFormatter * dateFormatter;
 	
@@ -43,7 +47,15 @@
     
 	self.navigationItem.leftBarButtonItem = self.editButtonItem;
 	
-	[self.refreshControl addTarget:self action:@selector(syncData) forControlEvents:UIControlEventValueChanged];
+	if (_refreshHeader == nil) {
+		RefreshTableHeader *view = [[RefreshTableHeader alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+		view.delegate = self;
+		[self.tableView addSubview:view];
+		_refreshHeader = view;
+	}
+	
+	//  update the last update date
+	[_refreshHeader refreshLastUpdatedDate];
 	
 	[self loadTasks];
 }
@@ -57,6 +69,8 @@
 - (void)loadTasks {
 	tasks = [[NSMutableArray alloc] init];
 	
+	NSString * userId = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserId"];
+	
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 	
     context = [appDelegate managedObjectContext];
@@ -66,7 +80,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDesc];
 	
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"isComplete = YES"];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"isComplete = YES && (hasBeenDeleted = NO OR hasBeenDeleted = nil) && (userId = %@)", userId];
     [request setPredicate:pred];
 	
     NSError *error;
@@ -83,8 +97,6 @@
 	UIButton *button = clickedCell.completedButton;
     NSIndexPath *indexPathCell = [self.tableView indexPathForCell:clickedCell];
 	
-	NSLog(@"IndexPath: %ld", (long)indexPathCell.row);
-	
 	if ([button isSelected])
 		[button setSelected:NO];
 	else
@@ -92,6 +104,7 @@
 	
 	Task * task = tasks[indexPathCell.row];
 	task.isComplete = [button isSelected];
+	task.updateDate = [[NSDate alloc] init];
 	
 	NSError * error = nil;
 	[context save:&error];
@@ -114,7 +127,21 @@
 - (void)syncData
 {
 	// Update current core data with that from the web service
-	[self.refreshControl endRefreshing];
+	dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		NSError * error = nil;
+		[Synchroniser syncTasks:&error];
+		dispatch_async( dispatch_get_main_queue(), ^{
+			if (!error) {
+				[self loadTasks];
+			}
+			else {
+				NSLog(@"Error: %@", error.localizedDescription);
+				UIAlertView * syncAlert = [[UIAlertView alloc] initWithTitle:@"Sync Error" message:@"Unable to syncronise with the server. Please check your internet connection." delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+				[syncAlert show];
+			}
+			[self endRefreshing];
+		});
+	});
 }
 
 - (void)didReceiveMemoryWarning
@@ -154,7 +181,7 @@
 		NSCalendar *cal = [NSCalendar currentCalendar];
 		NSDateComponents *components = [cal components:(NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:[NSDate date]];
 		NSDate *today = [cal dateFromComponents:components];
-		components = [cal components:(NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:task.	dueDate];
+		components = [cal components:(NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:task.dueDate];
 		NSDate *otherDate = [cal dateFromComponents:components];
 		
 		if([today compare:otherDate] == NSOrderedSame) {
@@ -199,11 +226,29 @@
 	}
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (tasks.count >= 1) {
+		CGFloat cellHeight = 70;
+		
+		Task * task = tasks[indexPath.row];
+		
+		if (task.taskDescription) {
+			cellHeight += [self heightForLabelWithString:task.taskDescription];
+		}
+		
+		return cellHeight;
+	}
+	else {
+		return tableView.rowHeight;
+	}
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [context deleteObject:[tasks objectAtIndex:indexPath.row]];
-        
+        Task * task = [tasks objectAtIndex:indexPath.row];
+        task.hasBeenDeleted = YES;
         NSError *error = nil;
         if (![context save:&error]) {
             NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
@@ -224,6 +269,62 @@
 	controller.task = tasks[indexPath.row];
 	
 	[self.navigationController pushViewController:controller animated:YES];
+}
+
+- (CGFloat)heightForLabelWithString:(NSString*)string
+{
+	CGFloat horizontalPadding = 82;
+    CGFloat widthOfTextView = self.tableView.frame.size.width - horizontalPadding;
+	
+	UIFont *font = [UIFont systemFontOfSize:14];
+	NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:string attributes:@{NSFontAttributeName: font}];
+	CGRect rect = [attributedText boundingRectWithSize:(CGSize){widthOfTextView, CGFLOAT_MAX}
+											   options:NSStringDrawingUsesLineFragmentOrigin
+											   context:nil];
+	CGFloat height = rect.size.height;
+    
+	return height;
+}
+
+#pragma mark -
+#pragma mark Data Source Loading / Reloading Methods
+
+- (void)reloadTableViewDataSource{
+	_reloading = YES;
+	[self syncData];
+}
+
+- (void)endRefreshing{
+	_reloading = NO;
+	[_refreshHeader refreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+}
+
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+	[_refreshHeader refreshScrollViewDidScroll:scrollView];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	[_refreshHeader refreshScrollViewDidEndDragging:scrollView];
+}
+
+
+#pragma mark -
+#pragma mark RefreshTableHeaderDelegate Methods
+
+- (void)refreshTableHeaderDidTriggerRefresh:(RefreshTableHeader*)view{
+	[self reloadTableViewDataSource];
+}
+
+- (BOOL)refreshTableHeaderDataSourceIsLoading:(RefreshTableHeader*)view{
+	return _reloading;
+}
+
+- (NSDate*)refreshTableHeaderDataSourceLastUpdated:(RefreshTableHeader*)view{
+	return [[NSUserDefaults standardUserDefaults] objectForKey:@"LastSyncDate"];
 }
 
 @end

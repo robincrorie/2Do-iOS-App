@@ -14,6 +14,7 @@
 		127B54E1192918180094463E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 127B54E0192918180094463E /* User.m */; };
 		127B54E6192930EB0094463E /* Synchroniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 127B54E5192930EB0094463E /* Synchroniser.m */; };
 		127B54EA1929E51B0094463E /* TaskObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 127B54E91929E51B0094463E /* TaskObject.m */; };
+		127B54F1192A06F40094463E /* RefreshTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 127B54F0192A06F40094463E /* RefreshTableHeader.m */; };
 		12D7AD2A1923B6AB00533F10 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D7AD291923B6AB00533F10 /* Foundation.framework */; };
 		12D7AD2C1923B6AB00533F10 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D7AD2B1923B6AB00533F10 /* CoreGraphics.framework */; };
 		12D7AD2E1923B6AB00533F10 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D7AD2D1923B6AB00533F10 /* UIKit.framework */; };
@@ -65,6 +66,8 @@
 		127B54E5192930EB0094463E /* Synchroniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Synchroniser.m; path = 2Do/Synchroniser/Synchroniser.m; sourceTree = "<group>"; };
 		127B54E81929E51B0094463E /* TaskObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaskObject.h; path = 2Do/Objects/TaskObject.h; sourceTree = SOURCE_ROOT; };
 		127B54E91929E51B0094463E /* TaskObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaskObject.m; path = 2Do/Objects/TaskObject.m; sourceTree = SOURCE_ROOT; };
+		127B54EF192A06F40094463E /* RefreshTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RefreshTableHeader.h; path = 2Do/RefreshTableHeader/RefreshTableHeader.h; sourceTree = "<group>"; };
+		127B54F0192A06F40094463E /* RefreshTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RefreshTableHeader.m; path = 2Do/RefreshTableHeader/RefreshTableHeader.m; sourceTree = "<group>"; };
 		12D7AD261923B6AB00533F10 /* 2Do.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2Do.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12D7AD291923B6AB00533F10 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		12D7AD2B1923B6AB00533F10 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -173,9 +176,19 @@
 			name = Objects;
 			sourceTree = "<group>";
 		};
+		127B54EB192A02DB0094463E /* RefreshTableHeader */ = {
+			isa = PBXGroup;
+			children = (
+				127B54EF192A06F40094463E /* RefreshTableHeader.h */,
+				127B54F0192A06F40094463E /* RefreshTableHeader.m */,
+			);
+			name = RefreshTableHeader;
+			sourceTree = "<group>";
+		};
 		12D7AD1D1923B6AB00533F10 = {
 			isa = PBXGroup;
 			children = (
+				127B54EB192A02DB0094463E /* RefreshTableHeader */,
 				127B54E3192930320094463E /* Synchroniser */,
 				127B54D31928CA6D0094463E /* SoapTool */,
 				127B54D01928CA6D0094463E /* GDataXML */,
@@ -391,6 +404,7 @@
 				12D7AD3F1923B6AB00533F10 /* _Do.xcdatamodeld in Sources */,
 				12D7B0A41926414800533F10 /* Login.m in Sources */,
 				12D7AD671923E13B00533F10 /* Completed.m in Sources */,
+				127B54F1192A06F40094463E /* RefreshTableHeader.m in Sources */,
 				127B54D61928CA6D0094463E /* GDataXMLNode.m in Sources */,
 				12D7AD381923B6AB00533F10 /* main.m in Sources */,
 				127B54E1192918180094463E /* User.m in Sources */,
