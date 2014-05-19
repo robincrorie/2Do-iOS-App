@@ -35,3 +35,15 @@ It also does NOT add a task ID when the task is created locally. This means that
 When a task is deleted from the device, it simply sets a boolen flag within the tasks managed object. Once the sync occurs successfully and deletes it from the server, the web service responds with if it was successful or not, if so then the task is removed from the divice.
 
 Of course to allow the user to be able to use the application offline, once a user has registered or logged into the app successfully, an entry is made recording the users details. On furture login attempts, the application will look to see if the user exists locally before making the call to the web service to authenticate them. This means that any user that has previosly logged into the application using that device in the past, will continue to be able to do so once the divice is offline.
+
+Web Service Info
+================
+
+I wrote the web service myself in Java using JAX_WS.
+It is hosted on one of my own dedicated servers running Linux.
+I created a sub domain from one of my URLs to point to the server.
+The web service is deployed within a Tomcat container, so I also had to set up the apache configuration to allow a proxy pass and reverse through to/from this.
+
+Automatic building and deployment has been scipted using Ant.
+
+I am using a MySQL database and jdbc to connect to it from the web application.
