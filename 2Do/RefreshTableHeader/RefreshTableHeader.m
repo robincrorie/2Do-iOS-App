@@ -182,6 +182,7 @@
 			scrollView.contentInset = UIEdgeInsetsZero;
 		}
 		
+		[self refreshLastUpdatedDate];
 	}
 	
 	if (_state != PullRefreshLoading) {

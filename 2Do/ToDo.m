@@ -109,7 +109,7 @@
 	NSError * error = nil;
 	[context save:&error];
 	if (!error) {
-		[self performSelector:@selector(removeCellAtIndexPath:) withObject:indexPathCell afterDelay:0.5];
+		[self performSelector:@selector(removeCellAtIndexPath:) withObject:indexPathCell afterDelay:0.3];
 	}
 	else
 		NSLog(@"Error: %@", error.localizedDescription);
