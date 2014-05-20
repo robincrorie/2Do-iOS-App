@@ -205,12 +205,12 @@
 								 "<Title>%@</Title>\n"
 								 "<Description>%@</Description>\n"
 								 "<Priority>%d</Priority>\n"
-								 "<IsComplete>%hhd</IsComplete>\n"
+								 "<IsComplete>%@</IsComplete>\n"
 								 "<DueDate>%@</DueDate>\n"
 								 "<UpdatedDate>%@</UpdatedDate>\n"
 								 "</ser:UpdateTask>\n"
 								 "</soapenv:Body>\n"
-								 "</soapenv:Envelope>\n", [task.taskId stringValue], task.taskTitle, task.taskDescription, [task.taskPriority intValue], task.isComplete, [dateFormatter stringFromDate:task.dueDate], [dateFormatter stringFromDate:task.updateDate]
+								 "</soapenv:Envelope>\n", [task.taskId stringValue], task.taskTitle, task.taskDescription, [task.taskPriority intValue], [NSNumber numberWithBool:task.isComplete], [dateFormatter stringFromDate:task.dueDate], [dateFormatter stringFromDate:task.updateDate]
 								 ];
 		
 		NSData * xmlData = [SoapTool sendSOAP:soapMessage soapURL:SoapURL_TaskManager error:&*error];
@@ -255,12 +255,12 @@
 								 "<Title>%@</Title>\n"
 								 "<Description>%@</Description>\n"
 								 "<Priority>%d</Priority>\n"
-								 "<IsComplete>%hhd</IsComplete>\n"
+								 "<IsComplete>%@</IsComplete>\n"
 								 "<DueDate>%@</DueDate>\n"
 								 "<UpdatedDate>%@</UpdatedDate>\n"
 								 "</ser:AddTask>\n"
 								 "</soapenv:Body>\n"
-								 "</soapenv:Envelope>\n", task.userId, task.taskTitle, task.taskDescription, [task.taskPriority intValue], task.isComplete, [dateFormatter stringFromDate:task.dueDate], [dateFormatter stringFromDate:task.updateDate]
+								 "</soapenv:Envelope>\n", task.userId, task.taskTitle, task.taskDescription, [task.taskPriority intValue], [NSNumber numberWithBool:task.isComplete], [dateFormatter stringFromDate:task.dueDate], [dateFormatter stringFromDate:task.updateDate]
 								 ];
 		
 		NSData * xmlData = [SoapTool sendSOAP:soapMessage soapURL:SoapURL_TaskManager error:&*error];
