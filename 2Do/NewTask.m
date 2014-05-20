@@ -226,8 +226,13 @@ typedef enum {
 		if (!task) {
 			task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:context];
 		}
-		task.taskTitle = taskTitle.text;
-		task.taskDescription = [taskDescription.text isEqualToString:@"Task Notes"] ? nil : taskDescription.text;
+		
+		NSCharacterSet *chs = [NSCharacterSet characterSetWithCharactersInString:@"'<>{}[]()"];
+		NSString * safeTaskTitle = [[taskTitle.text componentsSeparatedByCharactersInSet:chs] componentsJoinedByString:@""];
+		NSString * safeTaskDescription = [[taskDescription.text componentsSeparatedByCharactersInSet:chs] componentsJoinedByString:@""];
+		
+		task.taskTitle = safeTaskTitle;
+		task.taskDescription = [safeTaskDescription isEqualToString:@"Task Notes"] ? nil : safeTaskDescription;
 		task.taskPriority = [NSNumber numberWithInt:priorityLevel];
 		task.userId = [NSNumber numberWithInt:userId];
 		task.dueDate = dueDate.date;
